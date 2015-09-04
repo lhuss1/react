@@ -33,6 +33,44 @@ var Statement = React.createClass({
         }
     });
 
+var StoreTable = React.createClass({
+        render: function() {
+            var rows = [];
+            var storeChargesTotal = "£";
+
+            if (this.props.details.skyStore !== undefined) {
+                 this.props.details.skyStore.rentals.forEach(function(rental) {
+                            rental["type"] = "Rentals";
+                            rows.push(<StoresRow stores={rental} key={rental.type} />);
+                        });
+
+                  //this.props.details.skyStore.rentals.buyAndKeep(function(bandkeep) {
+                  //           bandkeep["type"] = "Buy and Keep";
+                  //           rows.push(<StoresRow subscription={bandkeep} key={bandkeep.type} />);
+                  //       });
+
+                 storeChargesTotal += this.props.details.skyStore.total;
+            }
+
+
+            return (
+                <div className="charges-table-container packageDetails">
+                    <h3 className="padding-10"><small> Sky Store - {storeChargesTotal}</small></h3>
+                    <table className="table table-condensed table-striped">
+                        <thead>
+                            <tr>
+                                <th>Type</th>
+                                <th>Title</th>
+                                <th>Cost</th>
+                            </tr>
+                        </thead>
+                        <tbody>{rows}</tbody>
+                    </table>
+                </div>
+                );
+        }
+    });
+
 var PackageTable = React.createClass({
         render: function() {
             var rows = [];
@@ -114,6 +152,8 @@ var ChargesTable = React.createClass({
                         <Statement details={this.props.details} />
                         <PackageTable details={this.props.details} />
                         <ChargesTable details={this.props.details} />
+                        <StoreTable details={this.props.details} />
+
                     </div>
                   );
           }

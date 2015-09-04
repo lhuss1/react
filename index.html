@@ -1,0 +1,32 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+        <title>Sky Test</title>
+
+        <link href="css/sky.css" rel="stylesheet">
+        <link href="css/bootstrap.min.css" rel="stylesheet">
+
+        <!--<script data-main="main" src="js/lib/require.js"></script>-->
+
+        <script type="application/javascript" src="js/lib/jquery/jquery-1.9.1.min.js"></script>
+        <script type="application/javascript" src="js/lib/react-with-addons.min.js"></script>
+
+        <script type="application/javascript" src="js/lib/JSXTransformer.js"></script>
+
+        <script type="text/jsx" src="js/templates/charges-detail-component.jsx"></script>
+        <script type="text/jsx" src="js/templates/bill-component.jsx"></script>
+
+        <script type="text/jsx" >
+            (function () {
+              React.render(<BillComponent details={{}} source="https://still-scrubland-9880.herokuapp.com/bill.json" />, document.body);
+            })();
+        </script>
+
+    </head>
+    <body>
+
+    </body>
+
+</html>
+

@@ -39,15 +39,16 @@ var StoreTable = React.createClass({
             var storeChargesTotal = "£";
 
             if (this.props.details.skyStore !== undefined) {
-                 this.props.details.skyStore.rentals.forEach(function(rental) {
-                            rental["type"] = "Rentals";
+                 this.props.details.skyStore.rentals.forEach(function(rental, index) {
+                            rental["type"] = "Rentals " + (++index);
+
                             rows.push(<StoresRow stores={rental} key={rental.type} />);
                         });
 
-                  //this.props.details.skyStore.rentals.buyAndKeep(function(bandkeep) {
-                  //           bandkeep["type"] = "Buy and Keep";
-                  //           rows.push(<StoresRow subscription={bandkeep} key={bandkeep.type} />);
-                  //       });
+                  this.props.details.skyStore.buyAndKeep.forEach(function(bandkeep, index) {
+                             bandkeep["type"] = "Buy and Keep " + (++index);
+                             rows.push(<StoresRow stores={bandkeep} key={bandkeep.type} />);
+                         });
 
                  storeChargesTotal += this.props.details.skyStore.total;
             }

@@ -52,3 +52,7 @@ tbody td, thead th {
     float: left;
     padding-right: 15px
 }
+
+.packageDetails {
+    height: 200px
+}

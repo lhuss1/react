@@ -33,57 +33,21 @@ var Statement = React.createClass({
         }
     });
 
-var Package = React.createClass({
-        render: function() {
-            var genDate = "";
-            var dueDate = "";
-            var fromDate = "";
-            var toDate = "";
-
-            if (this.props.details.statement !== undefined ) {
-                    genDate = this.props.details.statement.generated;
-                    dueDate = this.props.details.statement.due;
-                    fromDate = this.props.details.statement.period.from;
-                    toDate = this.props.details.statement.period.to;
-            }
-
-
-            return (
-             <div className="div-container">
-                <div className="panel panel-default">
-                   <div className="panel-heading">
-                     <h3 className="panel-title">Statement Details</h3>
-                   </div>
-                   <div className="panel-body">
-                     <div className="statementDetails">Generated <span className="label label-default">{genDate}</span></div>
-                     <div className="statementDetails">Due <span className="label label-primary">{dueDate}</span></div>
-                     <div className="statementDetails">From <span className="label label-success">{fromDate}</span></div>
-                     <div className="statementDetails">To <span className="label label-info">{toDate}</span></div>
-                   </div>
-                 </div>
-             </div>
-                );
-        }
-    });
-
 var PackageTable = React.createClass({
         render: function() {
             var rows = [];
-            var lastCharge = null;
-            //console.info(JSON.stringify(this.props.details, null, 2));
             var subChargesTotal = "£";
 
             if (this.props.details.package !== undefined) {
                  this.props.details.package.subscriptions.forEach(function(sub) {
-                            rows.push(<ChargesRow sub={sub} key={charge.name} />);
-                            lastCharge = charge.called;
+                            rows.push(<PackagesRow subscription={sub} key={sub.name} />);
                         });
 
-                 subChargesTotal += this.props.details.package.subscriptions.total;
+                 subChargesTotal += this.props.details.package.total;
             }
 
             return (
-                <div className="charges-table-container">
+                <div className="charges-table-container packageDetails">
                     <h3 className="padding-10"><small> Subscriptions - {subChargesTotal}</small></h3>
                     <table className="table table-condensed table-striped">
                         <thead>
@@ -148,6 +112,7 @@ var ChargesTable = React.createClass({
                           <h1> Sky <small> Bill - {billTotal}</small></h1>
                         </div>
                         <Statement details={this.props.details} />
+                        <PackageTable details={this.props.details} />
                         <ChargesTable details={this.props.details} />
                     </div>
                   );
